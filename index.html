@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | sh</title>
+
+  
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://unpkg.com/vconsole@3.15.1/dist/vconsole.min.js"></script>
+<script>var vConsole = new VConsole();</script>
+<script src="./unityjs/unitybase.js"></script>
+
+
+<body style="text-align: center; padding: 0; border: 0; margin: 0;">
+    <section>
+        <ul><li>
+            <a href="javascript:Telegram.WebApp.openTelegramLink('https://t.me/$LLY4Fj7KIVdbAQAAd-amM34E_M0');">发起支付-2</a>
+        </li></ul>
+    </section>
+    
+    <canvas id="unity-canvas" tabindex="-1"
+        style="width: 100vw; height: 100vh; background: #231F20"></canvas>
+    <script src="Build/sh--0913-1650.loader.js"></script>
+    <script>
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            // Mobile device style: fill the whole browser client area with the game canvas:
+            var meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+            document.getElementsByTagName('head')[0].appendChild(meta);
+
+            var canvas = document.querySelector("#unity-canvas");
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            canvas.style.position = "fixed";
+
+            document.body.style.textAlign = "left";
+        }
+
+        createUnityInstance(document.querySelector("#unity-canvas"), {
+            dataUrl: "Build/sh--0913-1650.data",
+            frameworkUrl: "Build/sh--0913-1650.framework.js",
+        codeUrl: "Build/sh--0913-1650.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+            companyName: "yl",
+            productName: "sh",
+            productVersion: "0.1",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      }).then((unityInstance) => {
+        console.log('Instance created',window.Telegram.WebApp);
+                window.unityInstance = unityInstance;
+                window.unityInstance.SendMessage("TelegramController", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
+            });
+    </script>
+
+    <script>
+    if(window.Telegram.WebApp){
+        window.Telegram.WebApp.onEvent('qrTextReceived',async (obj)=>{
+            console.log('#qrTextReceived',obj)
+            if( window.unityInstance){
+                window.unityInstance.SendMessage("TelegramController", "OnQrDetected", obj.data);
+            }
+        })
+    }
+    </script>
+</body>
+
+</html>
