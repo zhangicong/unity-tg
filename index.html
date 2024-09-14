@@ -10,6 +10,7 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://unpkg.com/vconsole@3.15.1/dist/vconsole.min.js"></script>
 <script>var vConsole = new VConsole();</script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 
 <body style="text-align: center; padding: 0; border: 0; margin: 0;">
@@ -43,17 +44,17 @@
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       }).then((unityInstance) => {
-        console.log('Instance created',window.Telegram.WebApp);
+                console.log('Instance created',window.Telegram.WebApp);
                 window.unityInstance = unityInstance;
-                window.unityInstance.SendMessage("Main", "OnReceiveMessage", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
+                if( window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user ){
+                    window.unityInstance.SendMessage("Main", "OnReceiveMessage", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
+                }else{
+                    window.unityInstance.SendMessage("Main", "OnReceiveMessage", "user is null");
+                }
             });
     </script>
 
     <script>
-        const interval = setInterval(function () {
-            window.unityInstance.SendMessage("Main", "OnReceiveMessage", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
-        }, 5000);
-        
         if(window.Telegram.WebApp){
             window.Telegram.WebApp.onEvent('qrTextReceived',async (obj)=>{
                 console.log('#qrTextReceived',obj)
