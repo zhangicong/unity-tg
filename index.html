@@ -10,19 +10,12 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://unpkg.com/vconsole@3.15.1/dist/vconsole.min.js"></script>
 <script>var vConsole = new VConsole();</script>
-<script src="./unityjs/unitybase.js"></script>
 
 
 <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-    <section>
-        <ul><li>
-            <a href="javascript:Telegram.WebApp.openTelegramLink('https://t.me/$LLY4Fj7KIVdbAQAAd-amM34E_M0');">发起支付-2</a>
-        </li></ul>
-    </section>
-    
     <canvas id="unity-canvas" tabindex="-1"
         style="width: 100vw; height: 100vh; background: #231F20"></canvas>
-    <script src="Build/sh--0913-1650.loader.js"></script>
+    <script src="Build/sh--0914-0923.loader.js"></script>
     <script>
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
             // Mobile device style: fill the whole browser client area with the game canvas:
@@ -40,9 +33,9 @@
         }
 
         createUnityInstance(document.querySelector("#unity-canvas"), {
-            dataUrl: "Build/sh--0913-1650.data",
-            frameworkUrl: "Build/sh--0913-1650.framework.js",
-        codeUrl: "Build/sh--0913-1650.wasm",
+            dataUrl: "Build/sh--0914-0923.data",
+            frameworkUrl: "Build/sh--0914-0923.framework.js",
+        codeUrl: "Build/sh--0914-0923.wasm",
         streamingAssetsUrl: "StreamingAssets",
             companyName: "yl",
             productName: "sh",
