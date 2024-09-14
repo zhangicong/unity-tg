@@ -15,7 +15,7 @@
 <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" tabindex="-1"
         style="width: 100vw; height: 100vh; background: #231F20"></canvas>
-    <script src="Build/sh--0914-0923.loader.js"></script>
+    <script src="Build/unity-tg.loader.js"></script>
     <script>
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
             // Mobile device style: fill the whole browser client area with the game canvas:
@@ -33,9 +33,9 @@
         }
 
         createUnityInstance(document.querySelector("#unity-canvas"), {
-            dataUrl: "Build/sh--0914-0923.data",
-            frameworkUrl: "Build/sh--0914-0923.framework.js",
-        codeUrl: "Build/sh--0914-0923.wasm",
+            dataUrl: "Build/unity-tg.data",
+            frameworkUrl: "Build/unity-tg.framework.js",
+        codeUrl: "Build/unity-tg.wasm",
         streamingAssetsUrl: "StreamingAssets",
             companyName: "yl",
             productName: "sh",
@@ -45,7 +45,7 @@
       }).then((unityInstance) => {
         console.log('Instance created',window.Telegram.WebApp);
                 window.unityInstance = unityInstance;
-                window.unityInstance.SendMessage("TelegramController", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
+                window.unityInstance.SendMessage("Camera", "OnReceiveMessage", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
             });
     </script>
 
