@@ -50,14 +50,18 @@
     </script>
 
     <script>
-    if(window.Telegram.WebApp){
-        window.Telegram.WebApp.onEvent('qrTextReceived',async (obj)=>{
-            console.log('#qrTextReceived',obj)
-            if( window.unityInstance){
-                window.unityInstance.SendMessage("TelegramController", "OnQrDetected", obj.data);
-            }
-        })
-    }
+        const interval = setInterval(function () {
+            window.unityInstance.SendMessage("Main", "OnReceiveMessage", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
+        }, 5000);
+        
+        if(window.Telegram.WebApp){
+            window.Telegram.WebApp.onEvent('qrTextReceived',async (obj)=>{
+                console.log('#qrTextReceived',obj)
+                if( window.unityInstance){
+                    window.unityInstance.SendMessage("TelegramController", "OnQrDetected", obj.data);
+                }
+            })
+        }
     </script>
 </body>
 
